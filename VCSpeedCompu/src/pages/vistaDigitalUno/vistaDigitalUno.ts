@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AlertController, LoadingController, NavController, Platform, NavParams } from 'ionic-angular';
+//moment
+//import * as moment from 'moment';
 //home
 import { HomePage } from '../home/home';
 //nuevos
@@ -26,6 +28,15 @@ export class vistaDigitalUnoPage {
   nombreLocalidad: any = "No definida";
   iconoTiempo: any;
   estadoTiempo: any = "Sin Información";
+  minMax: any = "Sin Información";
+  velocidadViento: any;
+  velocidadVientoStr: any = "Sin Información";
+  tempActual: any = 0;
+  humedad: any = "Sin Info";
+  salidaSol: any = "Sin info";
+  entradaSol: any = "Sin info";
+  fechaActual: any = "";
+
 
   constructor(
     public navCtrl: NavController,
@@ -42,6 +53,7 @@ export class vistaDigitalUnoPage {
       this.platform.ready().then(() => {
         //Setup a resume event listener
         document.addEventListener('resume', () => {
+          
           //Get the local weather when the app resumes
           this.getLocalWeather();
         });
@@ -98,8 +110,28 @@ export class vistaDigitalUnoPage {
         }
       );
     }
+    private formatDate(date) {
+      var monthNames = [
+        "Enero", "Febrero", "Marzo",
+        "Abril", "Mayo", "Junio", "Julio",
+        "Agosto", "Septiembre", "Octubre",
+        "Noviembre", "Diciembre"
+      ];
 
+      var day = date.getDate();
+      var monthIndex = date.getMonth();
+      var year = date.getFullYear();
+
+      return day + ' de ' + monthNames[monthIndex] + ' del ' + year;
+    }
+    private camelize(string) {
+      return string.charAt(0).toUpperCase() + string.slice(1);
+    }
     private formatWeatherData(data): any {
+      //fecha actual "MMM DD YYYY"
+      var fecha = new Date();
+      this.fechaActual = this.formatDate(fecha);
+      //this.fechaActual = moment().format("dddd, MMMM Do YYYY");
       //create a blank array to hold our results
       let tmpArray = [];
       //Add the weather data values to the array
@@ -111,8 +143,17 @@ export class vistaDigitalUnoPage {
       if (data.weather) {
         //tomamos el primero
         var tiempo = data.weather[0];
-        this.estadoTiempo = tiempo.description;
+        this.estadoTiempo = this.camelize(tiempo.description);
         this.iconoTiempo = "http://openweathermap.org/img/w/" + tiempo.icon + ".png";
+      }
+      if (data.main) {
+        this.minMax = 'Min: ' + data.main.temp_min.toFixed() + ' - Max: ' + data.main.temp_max.toFixed();
+        var factorVelocidad = 1.60934;
+        this.velocidadViento = parseFloat(data.wind.speed) * factorVelocidad;
+        this.velocidadVientoStr = this.velocidadViento.toFixed(1) + " Km/Hr";
+        this.tempActual = parseInt(data.main.temp);
+        this.humedad = data.main.humidity + '%';
+
       }
       tmpArray.push({ 'name': 'Temperature', 'value': data.main.temp + this.degreeStr });
       tmpArray.push({ 'name': 'Low', 'value': data.main.temp_min + this.degreeStr });
@@ -128,10 +169,12 @@ export class vistaDigitalUnoPage {
       if (data.sys.sunrise) {
         var sunriseDate = new Date(data.sys.sunrise * 1000);
         tmpArray.push({ 'name': 'Sunrise', 'value': sunriseDate.toLocaleTimeString() });
+        this.salidaSol = sunriseDate.toLocaleTimeString();
       }
       if (data.sys.sunset) {
         var sunsetDate = new Date(data.sys.sunset * 1000);
         tmpArray.push({ 'name': 'Sunset', 'value': sunsetDate.toLocaleTimeString() });
+        this.entradaSol = sunsetDate.toLocaleTimeString();
       }
       //Do we have a coordinates object? only if we passed it in on startup
       if (data.coord) {

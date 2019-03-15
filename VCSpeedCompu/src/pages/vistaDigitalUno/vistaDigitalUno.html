@@ -1,94 +1,108 @@
 
 
-<ion-content padding>
+<ion-content padding style="background-color: #634832; color: white;">
   <ion-fab bottom right edge style="bottom:0;">
     <button ion-fab mini (click)="volver()"><ion-icon name="arrow-back"></ion-icon></button>
   </ion-fab>
   <div class="container row m-0 p-0 w-100" style="max-width:100%;">
 
-    
-  <div class="col-6 col-sm-4 m-0 p-0">
+    <div class="col-12 col-sm-6 m-0 p-0">
+      <span>{{fechaActual}}</span>
+    </div>
+    <div class="col-12 col-sm-6 m-0 p-0">
+      <span>Otra Info</span>
+    </div>
+    <div class="col-6 col-sm-4 m-0 p-0">
 
-    <div class="row text-center m-0 p-0">
-      <div class="col-12 text-center m-0 p-0">
-        <span>{{nombreLocalidad}}</span>
+      <div class="row m-0 p-0">
+
+        <div class="col-12 m-0 p-0">
+          <img src="{{iconoTiempo}}" />&nbsp;<span style="font-size: xx-large;">{{tempActual}}°</span>
+        </div>
+        <div class="col-12 m-0 p-0">
+          <ion-icon name="pin"></ion-icon>&nbsp;<span>{{nombreLocalidad}}</span>
+        </div>
+        <div class="col-12 m-0 p-0">
+          <span>{{estadoTiempo}}</span>
+        </div>
+        <div class="col-12 m-0 p-0">
+          <span>{{minMax}}</span>
+        </div>
       </div>
-      <div class="col-12 text-center m-0 p-0">
-        <img src="{{iconoTiempo}}" />&nbsp;<span>26°</span>
-      </div>
-      <div class="col-12 text-center m-0 p-0">
-        <span>{{estadoTiempo}}</span>
-      </div>
+
     </div>
 
-  </div>
+    <div class="col-6 col-sm-4 m-0 p-0">
+      <div class="row m-0 p-0">
+
+        <div class="col-12 m-0 p-0">
+          <span>Humedad</span>&nbsp;<span><strong>{{humedad}}</strong></span>
+        </div>
+        <div class="col-12 m-0 p-0">
+          <span>Vientos</span>&nbsp;<span><strong>{{velocidadVientoStr}}</strong></span>
+        </div>
+        <div class="col-12 m-0 p-0">
+          <span>Salida</span>&nbsp;<span><strong>{{salidaSol}}</strong></span>
+        </div>
+        <div class="col-12 m-0 p-0">
+          <span>Entrada</span>&nbsp;<span><strong>{{entradaSol}}</strong></span>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-6 col-sm-4 m-0 p-0">
+
+      <div class="card">
+        <div class="card-header">
+          Temperatura
+        </div>
+        <div class="card-body">
+
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+
+        </div>
+      </div>
+    </div>
 
     <div class="col-6 col-sm-4 m-0 p-0">
 
-    <div class="card">
-      <div class="card-header">
-        Temperatura
-      </div>
-      <div class="card-body">
+      <div class="card">
+        <div class="card-header">
+          Temperatura
+        </div>
+        <div class="card-body">
 
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
 
-      </div>
-    </div>
-  </div>
-  <div class="col-6 col-sm-4 m-0 p-0">
-
-    <div class="card">
-      <div class="card-header">
-        Temperatura
-      </div>
-      <div class="card-body">
-
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-
+        </div>
       </div>
     </div>
-  </div>
+    <div class="col-6 col-sm-4 m-0 p-0">
 
-  <div class="col-6 col-sm-4 m-0 p-0">
+      <div class="card">
+        <div class="card-header">
+          Temperatura
+        </div>
+        <div class="card-body">
 
-    <div class="card">
-      <div class="card-header">
-        Temperatura
-      </div>
-      <div class="card-body">
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
 
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-
-      </div>
-    </div>
-  </div>
-  <div class="col-6 col-sm-4 m-0 p-0">
-
-    <div class="card">
-      <div class="card-header">
-        Temperatura
-      </div>
-      <div class="card-body">
-
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col-6 col-sm-4 m-0 p-0">
+    <div class="col-6 col-sm-4 m-0 p-0">
 
-    <div class="card">
-      <div class="card-header">
-        Temperatura
-      </div>
-      <div class="card-body">
+      <div class="card">
+        <div class="card-header">
+          Temperatura
+        </div>
+        <div class="card-body">
 
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+          <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
 
+        </div>
       </div>
     </div>
-  </div>
 
   </div>
 
